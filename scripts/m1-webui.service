@@ -1,5 +1,5 @@
 [Unit]
-Description=M1 WebUI API Server
+Description=M1 WebUI + Cloud Tunnel
 After=robot-launch.service network.target
 Wants=robot-launch.service
 
@@ -7,11 +7,12 @@ Wants=robot-launch.service
 Type=simple
 User=robot
 WorkingDirectory=/home/robot/webui
-ExecStart=/home/robot/.hermes/.venv/bin/python3 /home/robot/webui/control_server.py
+ExecStart=/usr/bin/python3 /home/robot/webui/control_server.py
+ExecStartPost=/bin/bash -c 'sleep 3; nohup bash /home/robot/webui/tunnel_guard.sh &'
 Restart=always
 RestartSec=5
-StandardOutput=append:/home/robot/webui/control_server.log
-StandardError=append:/home/robot/webui/control_server.log
+StandardOutput=append:/home/robot/webui/webui.log
+StandardError=append:/home/robot/webui/webui.log
 
 [Install]
 WantedBy=multi-user.target

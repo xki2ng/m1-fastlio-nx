@@ -423,25 +423,6 @@ class Handler(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    # PID 锁 — 防止多实例
-    import atexit
-    PID_FILE = os.path.expanduser("~/webui/.control_server.pid")
-    
-    # 杀旧进程
-    if os.path.exists(PID_FILE):
-        try:
-            with open(PID_FILE) as f:
-                old_pid = int(f.read().strip())
-            os.kill(old_pid, 15)
-            time.sleep(0.5)
-        except:
-            pass
-    
-    # 写 PID
-    with open(PID_FILE, "w") as f:
-        f.write(str(os.getpid()))
-    atexit.register(lambda: os.remove(PID_FILE) if os.path.exists(PID_FILE) else None)
-    
     server = ThreadingHTTPServer(("0.0.0.0", PORT), Handler)
     print(f"[control_server] M1 WebUI API :{PORT}")
     try:
