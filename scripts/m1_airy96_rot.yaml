@@ -1,16 +1,16 @@
 /**:
     ros__parameters:
         feature_extract_enable: false
-        point_filter_num: 2
+        point_filter_num: 1
         max_iteration: 4
-        filter_size_surf: 0.15
-        filter_size_map: 0.15
+        filter_size_surf: 0.3
+        filter_size_map: 0.3
         cube_side_length: 1000.0
         runtime_pos_log_enable: false
         map_file_path: "./test.pcd"
 
         common:
-            lid_topic:  "/front_lidar"
+            lid_topic:  "/front_lidar/filtered"
             imu_topic:  "/front_lidar/imu"
             time_sync_en: false
             time_offset_lidar_to_imu: 0.0   # both ROS time from converter, no offset needed
