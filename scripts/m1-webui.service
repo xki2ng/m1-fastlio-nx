@@ -1,0 +1,17 @@
+[Unit]
+Description=M1 WebUI API Server
+After=robot-launch.service network.target
+Wants=robot-launch.service
+
+[Service]
+Type=simple
+User=robot
+WorkingDirectory=/home/robot/webui
+ExecStart=/home/robot/.hermes/.venv/bin/python3 /home/robot/webui/control_server.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/robot/webui/control_server.log
+StandardError=append:/home/robot/webui/control_server.log
+
+[Install]
+WantedBy=multi-user.target
